@@ -1,5 +1,7 @@
 import * as THREE from "three";
 import Experience from "./Experience.js";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
+
 
 export default class Camera {
     constructor() {
@@ -8,8 +10,11 @@ export default class Camera {
         this.scene = this.experience.scene;
         this.canvas = this.experience.canvas;
 
+        console.log(this.canvas)
+
         this.createPerspectiveCamera();
         this.createOrthographicCamera();
+        this.setOrbitControls();
     }
 
     // создаем две камеры
@@ -22,9 +27,9 @@ export default class Camera {
         );
         // добавляем камеру к сцене
         this.scene.add(this.perspectiveCamera);
-        this.perspectiveCamera.position.x = 29;
-        this.perspectiveCamera.position.y = 14;
-        this.perspectiveCamera.position.z = 12;
+        // this.perspectiveCamera.position.x = 29;
+        // this.perspectiveCamera.position.y = 14;
+        this.perspectiveCamera.position.z = 50;
     }
 
     createOrthographicCamera() {
@@ -33,17 +38,25 @@ export default class Camera {
             (this.sizes.aspect * this.sizes.frustrum) / 2,
             this.sizes.frustrum / 2,
             -this.sizes.frustrum / 2,
-            -50,
-            50
+            -100,
+            100
         );
 
         // 6.5
-        this.orthographicCamera.position.y = 5.65;
-        this.orthographicCamera.position.z = 10;
-        this.orthographicCamera.rotation.x = -Math.PI / 6;
+        // this.orthographicCamera.position.y = 5.65;
+        // this.orthographicCamera.position.z = 10;
+        // this.orthographicCamera.rotation.x = -Math.PI / 6;
 
         this.scene.add(this.orthographicCamera);
     }
+
+    setOrbitControls() {
+        this.controls = new OrbitControls(this.perspectiveCamera, this.canvas);
+        this.controls.enableDamping = true;
+        this.controls.enableZoom = true;
+
+    }
+
     resize() {
         // Updating Perspective Camera on Resize
         this.perspectiveCamera.aspect = this.sizes.aspect;
@@ -59,7 +72,9 @@ export default class Camera {
         this.orthographicCamera.updateProjectionMatrix();
     }
 
-    update() {}
+    update() {
+        this.controls.update();
+    }
 
 }
 

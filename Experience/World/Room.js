@@ -10,7 +10,7 @@ export default class Room {
         this.actualRoom = this.room.scene;
 
         this.setModel();
-        console.log(this.actualRoom)
+        // console.log(this.actualRoom)
         // camera.position.z = 5;
     }
     setModel() {

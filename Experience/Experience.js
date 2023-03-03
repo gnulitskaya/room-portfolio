@@ -24,6 +24,7 @@ export default class Experience {
         this.resources = new Resources(assets);
         this.world = new World();
 
+        // слушает событие которое пришло
         this.time.on("update", () => {
             this.update();
         })
@@ -34,11 +35,13 @@ export default class Experience {
 
     update() {
         this.camera.update();
+        this.world.update();
         this.renderer.update();
     }
 
     resize() {
         this.camera.resize();
+        this.world.resize();
         this.renderer.resize();
     }
 }
