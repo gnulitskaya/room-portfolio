@@ -59,7 +59,7 @@ export default class Room {
         });
 
         this.scene.add(this.actualRoom);
-        this.actualRoom.scale.set(0.28,0.28,0.28);
+        this.actualRoom.scale.set(0.23,0.23,0.23);
         // this.actualRoom.rotation.y = Math.PI;
     }
 
