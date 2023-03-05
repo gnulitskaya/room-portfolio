@@ -27,9 +27,9 @@ export default class Camera {
         );
         // добавляем камеру к сцене
         this.scene.add(this.perspectiveCamera);
-        // this.perspectiveCamera.position.x = 29;
-        // this.perspectiveCamera.position.y = 14;
-        this.perspectiveCamera.position.z = 50;
+        this.perspectiveCamera.position.x = 29;
+        this.perspectiveCamera.position.y = 12;
+        this.perspectiveCamera.position.z = 14;
     }
 
     createOrthographicCamera() {
@@ -38,8 +38,8 @@ export default class Camera {
             (this.sizes.aspect * this.sizes.frustrum) / 2,
             this.sizes.frustrum / 2,
             -this.sizes.frustrum / 2,
-            -100,
-            100
+            -10,
+            10
         );
 
         // 6.5
@@ -47,6 +47,10 @@ export default class Camera {
         // this.orthographicCamera.position.z = 10;
         // this.orthographicCamera.rotation.x = -Math.PI / 6;
         this.scene.add(this.orthographicCamera);
+
+        this.helper = new THREE.CameraHelper(this.orthographicCamera);
+        this.scene.add(this.helper);
+
         const size = 10;
         const divisions = 10;
 
@@ -82,6 +86,11 @@ export default class Camera {
 
     update() {
         this.controls.update();
+
+        this.helper.matrixWorldNeedsUpdate = true;
+        this.helper.update();
+        this.helper.position.copy(this.orthographicCamera.position);
+        this.helper.rotation.copy(this.orthographicCamera.rotation);
     }
 
 }
