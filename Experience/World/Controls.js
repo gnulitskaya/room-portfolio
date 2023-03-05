@@ -1,5 +1,6 @@
 import * as THREE from "three";
 import Experience from "../Experience.js";
+import GSAP from "gsap";
 
 export default class Controls {
     constructor() {
@@ -12,7 +13,16 @@ export default class Controls {
         this.progress = 0;
         this.dummyCurve = new THREE.Vector3(0, 0, 0);
 
+        this.lerp = {
+            current: 0,
+            target: 1,
+            ease: 0.1
+        }
+
+        this.position = new THREE.Vector3(0, 0, 0);
+
         this.setPath();
+        this.onWheel();
     }
 
     // create path that camera can follow
@@ -36,18 +46,35 @@ export default class Controls {
         this.scene.add(curveObject);
     }
 
+    onWheel() {
+        window.addEventListener("wheel", (e) => {
+            if (e.deltaY > 0) {
+                this.lerp.target += 0.1;
+            } else {
+                this.lerp.target -= 0.1;
+                // if(this.progress < 0) {
+                //     this.progress = 1;
+                // }
+            }
+        })
+    }
+
 
     resize() {
     }
 
     update() {
+        // gsap utils lerp function
+        this.lerp.current = GSAP.utils.interpolate(
+            this.lerp.current,
+            this.lerp.target,
+            this.lerp.ease
+        )
         // to animate camera alonge the curve on each frame
-        this.curve.getPointAt(this.progress % 1, this.dummyCurve);
-        this.progress -= 0.01;
-        if(this.progress < 0) {
-            this.progress = 1;
-        }
-        this.camera.orthographicCamera.position.copy(this.dummyCurve);
+        this.curve.getPointAt(this.lerp.current, this.position);
+        // this.progress -= 0.01;
+
+        this.camera.orthographicCamera.position.copy(this.position);
     }
 
 }

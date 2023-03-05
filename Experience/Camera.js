@@ -66,7 +66,7 @@ export default class Camera {
     setOrbitControls() {
         this.controls = new OrbitControls(this.perspectiveCamera, this.canvas);
         this.controls.enableDamping = true;
-        this.controls.enableZoom = true;
+        this.controls.enableZoom = false;
     }
 
     resize() {
