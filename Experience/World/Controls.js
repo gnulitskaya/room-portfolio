@@ -78,6 +78,19 @@ export default class Controls {
         this.curve.getPointAt(this.lerp.current % 1, this.position);
         this.camera.orthographicCamera.position.copy(this.position);
 
+        this.directionalVector.subVectors(
+            this.curve.getPointAt((this.lerp.current % 1) + 0.000001),
+            this.position
+        )
+
+        this.directionalVector.normalize();
+        this.crossVector.crossVectors(
+            this.directionalVector,
+            this.staticVector
+        );
+        // this.crossVector.multiplyScalar(100000);
+        this.camera.orthographicCamera.lookAt(this.crossVector);
+
         // // keeps moving when scroll ends
         // if (this.back) {
         //     this.lerp.target -= 0.001;
