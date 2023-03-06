@@ -7,6 +7,7 @@ import assets from "./Utils/assets.js";
 import Camera from "./Camera.js";
 import Renderer from "./Renderer.js";
 import World from "./World/World.js";
+import Theme from "./Theme.js";
 
 export default class Experience {
     static instance
@@ -22,6 +23,7 @@ export default class Experience {
         this.renderer = new Renderer();
         this.time = new Time();
         this.resources = new Resources(assets);
+        this.theme = new Theme();
         this.world = new World();
 
         // слушает событие которое пришло
