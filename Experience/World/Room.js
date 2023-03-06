@@ -37,7 +37,6 @@ export default class Room {
                     groupchild.receiveShadow = true;
                 });
             }
-            console.log(child.name);
             // для аквариума добавляяем эффект стекла
             if (child.name === "AquariumGlass") {
                 child.material = new THREE.MeshPhysicalMaterial();
@@ -66,7 +65,6 @@ export default class Room {
     // animation fish
     setAnimation() {
         this.mixer = new THREE.AnimationMixer(this.actualRoom);
-        console.log(this.room)
         this.swim = this.mixer.clipAction(this.room.animations[128]);
         this.swim.play();
     }
@@ -74,7 +72,6 @@ export default class Room {
     onMouseMove() {
         window.addEventListener("mousemove", (e) => {
             this.rotation = ((e.clientX - window.innerWidth / 2) * 2) / window.innerWidth;
-            console.log(this.rotation);
             this.lerp.target = this.rotation * 0.1;
         })
     }
