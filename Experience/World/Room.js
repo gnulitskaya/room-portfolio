@@ -61,11 +61,11 @@ export default class Room {
         // add light for Aquarium
         const width = 0.5;
         const height = 0.7;
-        const intensity = 1;
+        const intensity = 6;
         const rectLight = new THREE.RectAreaLight( 0xffffff, intensity,  width, height );
-        rectLight.position.set( 7.68244, 7, 0.5);
+        rectLight.position.set( 3.5406, 3, 0.5);
         rectLight.rotation.x = -Math.PI / 2;
-        rectLight.rotation.z = -Math.PI / 4;
+        rectLight.rotation.z = Math.PI / 4;
 
         this.actualRoom.add( rectLight );
 
