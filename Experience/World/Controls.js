@@ -14,6 +14,11 @@ export default class Controls {
         this.camera = this.experience.camera;
         this.room = this.experience.world.room.actualRoom;
 
+        // circles
+        this.circleFirst = this.experience.world.floor.circleFirst;
+        this.circleSecond = this.experience.world.floor.circleSecond;
+        this.circleThird = this.experience.world.floor.circleThird;
+
         // for light in Aquarium
         this.room.children.forEach((child) => {
             if (child.type === "RectAreaLight") {
@@ -22,6 +27,14 @@ export default class Controls {
         });
 
         GSAP.registerPlugin(ScrollTrigger);
+
+        if (
+            !/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+                navigator.userAgent
+            )
+        ) {
+            this.setSmoothScroll();
+        }
 
         this.setScrollTrigger();
 
@@ -315,58 +328,58 @@ export default class Controls {
 
                 // All animations
                 // First section -----------------------------------------
-                // this.firstCircle = new GSAP.timeline({
-                //     scrollTrigger: {
-                //         trigger: ".first-move",
-                //         start: "top top",
-                //         end: "bottom bottom",
-                //         scrub: 0.6,
-                //     },
-                // }).to(this.circleFirst.scale, {
-                //     x: 3,
-                //     y: 3,
-                //     z: 3,
-                // });
-                //
-                // // Second section -----------------------------------------
-                // this.secondCircle = new GSAP.timeline({
-                //     scrollTrigger: {
-                //         trigger: ".second-move",
-                //         start: "top top",
-                //         end: "bottom bottom",
-                //         scrub: 0.6,
-                //     },
-                // })
-                //     .to(
-                //         this.circleSecond.scale,
-                //         {
-                //             x: 3,
-                //             y: 3,
-                //             z: 3,
-                //         },
-                //         "same"
-                //     )
-                //     .to(
-                //         this.room.position,
-                //         {
-                //             y: 0.7,
-                //         },
-                //         "same"
-                //     );
-                //
-                // // Third section -----------------------------------------
-                // this.thirdCircle = new GSAP.timeline({
-                //     scrollTrigger: {
-                //         trigger: ".third-move",
-                //         start: "top top",
-                //         end: "bottom bottom",
-                //         scrub: 0.6,
-                //     },
-                // }).to(this.circleThird.scale, {
-                //     x: 3,
-                //     y: 3,
-                //     z: 3,
-                // });
+                this.firstCircle = new GSAP.timeline({
+                    scrollTrigger: {
+                        trigger: ".first-move",
+                        start: "top top",
+                        end: "bottom bottom",
+                        scrub: 0.6,
+                    },
+                }).to(this.circleFirst.scale, {
+                    x: 3,
+                    y: 3,
+                    z: 3,
+                });
+
+                // Second section -----------------------------------------
+                this.secondCircle = new GSAP.timeline({
+                    scrollTrigger: {
+                        trigger: ".second-move",
+                        start: "top top",
+                        end: "bottom bottom",
+                        scrub: 0.6,
+                    },
+                })
+                    .to(
+                        this.circleSecond.scale,
+                        {
+                            x: 3,
+                            y: 3,
+                            z: 3,
+                        },
+                        "same"
+                    )
+                    .to(
+                        this.room.position,
+                        {
+                            y: 0.7,
+                        },
+                        "same"
+                    );
+
+                // Third section -----------------------------------------
+                this.thirdCircle = new GSAP.timeline({
+                    scrollTrigger: {
+                        trigger: ".third-move",
+                        start: "top top",
+                        end: "bottom bottom",
+                        scrub: 0.6,
+                    },
+                }).to(this.circleThird.scale, {
+                    x: 3,
+                    y: 3,
+                    z: 3,
+                });
 
                 // Mini Platform Animations
                 // this.secondPartTimeline = new GSAP.timeline({
