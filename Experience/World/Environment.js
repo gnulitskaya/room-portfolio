@@ -19,17 +19,17 @@ export default class Environment {
         // утилита для выбора цвета в браузере
         // this.setGUI();
     }
-    setGUI() {
-        this.gui.addColor(this.obj, "colorObj").onChange(() => {
-            this.sunLight.color.copy(this.obj.colorObj);
-            this.ambientLight.color.copy(this.obj.colorObj);
-            console.log(this.obj.colorObj);
-        });
-        this.gui.add(this.obj, "intensity", 0, 10).onChange(() => {
-            this.sunLight.intensity = this.obj.intensity;
-            this.sunLight.ambientLight = this.obj.intensity;
-        });
-    }
+    // setGUI() {
+    //     this.gui.addColor(this.obj, "colorObj").onChange(() => {
+    //         this.sunLight.color.copy(this.obj.colorObj);
+    //         this.ambientLight.color.copy(this.obj.colorObj);
+    //         console.log(this.obj.colorObj);
+    //     });
+    //     this.gui.add(this.obj, "intensity", 0, 10).onChange(() => {
+    //         this.sunLight.intensity = this.obj.intensity;
+    //         this.sunLight.ambientLight = this.obj.intensity;
+    //     });
+    // }
 
     setSunlight() {
         this.sunLight = new THREE.DirectionalLight("#ffffff", 3);

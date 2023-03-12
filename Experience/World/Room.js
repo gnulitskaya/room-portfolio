@@ -18,14 +18,15 @@ export default class Room {
             target: 1,
             ease: 0.1,
         }
-
+        console.log(this.room)
         this.setModel();
         this.setAnimation();
         this.onMouseMove();
-        // console.log(this.actualRoom)
+
         // camera.position.z = 5;
     }
     setModel() {
+
         // add shadows
         this.actualRoom.children.forEach((child) => {
             child.castShadow = true;
@@ -39,23 +40,43 @@ export default class Room {
                 });
             }
             // для аквариума добавляяем эффект стекла
-            if (child.name === "AquariumGlass") {
-                child.material = new THREE.MeshPhysicalMaterial();
-                child.material.roughness = 0;
-                child.material.color.set(0x549dd2);
-                child.material.ior = 3;
-                child.material.transmission = 1;
-                child.material.opacity = 1;
+            if (child.name === "Aquarium") {
+                child.children[0].material = new THREE.MeshPhysicalMaterial();
+                child.children[0].material.roughness = 0;
+                child.children[0].material.color.set(0x549dd2);
+                child.children[0].material.ior = 3;
+                child.children[0].material.transmission = 1;
+                child.children[0].material.opacity = 1;
                 // child.children[0].material.depthWrite = false;
                 // child.children[0].material.depthTest = false;
             }
 
             // заставка на компе
-            if (child.name === "Screen") {
-                child.material = new THREE.MeshBasicMaterial({
+            if (child.name === "Computer") {
+                child.children[1].material = new THREE.MeshBasicMaterial({
                     map: this.resources.items.screen,
                 });
             }
+
+            // порожек не добавлен
+            // if (child.name === "Mini_Floor") {
+            //     child.position.x = -0.289521;
+            //     child.position.z = 8.83572;
+            // }
+
+            // if (
+            //     child.name === "Mailbox" ||
+            //     child.name === "Lamp" ||
+            //     child.name === "FloorFirst" ||
+            //     child.name === "FloorSecond" ||
+            //     child.name === "FloorThird" ||
+            //     child.name === "Dirt" ||
+            //     child.name === "Flower1" ||
+            //     child.name === "Flower2"
+            // ) {
+            //     child.scale.set(0, 0, 0);
+            // }
+
         });
 
         // add light for Aquarium
@@ -80,7 +101,7 @@ export default class Room {
     // animation fish
     setAnimation() {
         this.mixer = new THREE.AnimationMixer(this.actualRoom);
-        this.swim = this.mixer.clipAction(this.room.animations[128]);
+        this.swim = this.mixer.clipAction(this.room.animations[9]);
         this.swim.play();
     }
 
