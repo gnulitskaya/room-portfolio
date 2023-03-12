@@ -203,6 +203,7 @@ export default class Controls {
 
             // all
             all: () => {
+                // scroll in sections
                 this.sections = document.querySelectorAll(".section");
                 this.sections.forEach((section) => {
                     this.progressWrapper =

@@ -122,13 +122,13 @@ svg {
 .left{
   margin-right: auto;
   border-top-right-radius: 700px 700px;
-  border-bottom-right-radius: 0px 0px;
+  border-bottom-right-radius: 0 0;
 }
 
 .right{
   margin-left: auto;
   border-top-left-radius: 700px 700px;
-  border-bottom-left-radius: 0px 0px;
+  border-bottom-left-radius: 0 0;
 }
 
 /* Hero section -------------------------------- */
