@@ -179,7 +179,7 @@ svg {
 
 .section-intro-wrapper{
   position: relative;
-  padding: 20% 5%;
+  padding: 5% 0;
   border-bottom: 2px solid var(--color-pink);
   /*padding-bottom: 400px;*/
 }
@@ -190,7 +190,7 @@ svg {
 
 .section-detail-wrapper{
   position: relative;
-  padding: 20% 5%;
+  /*padding: 20% 5%;*/
 }
 
 .section-heading{
