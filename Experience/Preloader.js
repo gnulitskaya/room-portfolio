@@ -35,7 +35,6 @@ export default class Preloader extends EventEmitter {
 
         this.room = this.experience.world.room.actualRoom;
         this.roomChildren = this.experience.world.room.roomChildren;
-        console.log(this.roomChildren);
     }
 
     firstIntro() {
@@ -43,7 +42,7 @@ export default class Preloader extends EventEmitter {
             this.timeline = new GSAP.timeline();
             this.timeline.set(".animatedis", { y: 0, yPercent: 100 });
             this.timeline.to(".preloader", {
-                opacity: 0,
+                display: 'none',
                 delay: 1,
                 onComplete: () => {
                     document.querySelector(".preloader").classList.add("hidden");
@@ -54,14 +53,15 @@ export default class Preloader extends EventEmitter {
             if (this.device === "desktop") {
                 this.timeline
                     .to(this.roomChildren.cube.scale, {
-                        x: 3,
-                        y: 3,
-                        z: 3,
+                        x: 2.5,
+                        y: 2.5,
+                        z: 2.5,
                         ease: "back.out(2.5)",
                         duration: 0.7,
                     })
                     .to(this.room.position, {
-                        x: -1,
+                        x: -1.7,
+                        y: 0.3,
                         ease: "power1.out",
                         duration: 0.7,
                         onComplete: resolve,
@@ -69,9 +69,9 @@ export default class Preloader extends EventEmitter {
             } else {
                 this.timeline
                     .to(this.roomChildren.cube.scale, {
-                        x: 1.4,
-                        y: 1.4,
-                        z: 1.4,
+                        x: 2,
+                        y: 2,
+                        z: 2,
                         ease: "back.out(2.5)",
                         duration: 0.7,
                     })
@@ -336,9 +336,7 @@ export default class Preloader extends EventEmitter {
 
 
     onScroll(e) {
-        console.log('aaa', e.deltaY);
         if (e.deltaY > 0) {
-            console.log('ssssroll');
             this.removeEventListeners();
             this.playSecondIntro();
         }
@@ -351,7 +349,6 @@ export default class Preloader extends EventEmitter {
         let currentY = e.touches[0].clientY;
         let difference = this.initalY - currentY;
         if (difference > 0) {
-            console.log("swipped up");
             this.removeEventListeners();
             this.playSecondIntro();
         }
@@ -386,7 +383,7 @@ export default class Preloader extends EventEmitter {
 
     move() {
         if (this.device === "desktop") {
-            this.room.position.set(-1, 0, 0);
+            this.room.position.set(-1.7, 0.3, 0);
         } else {
             this.room.position.set(0, 0, -1);
         }
@@ -397,9 +394,9 @@ export default class Preloader extends EventEmitter {
         this.roomChildren.rectLight.height = 0;
 
         if (this.device === "desktop") {
-            this.room.scale.set(0.23, 0.23, 0.23);
+            this.room.scale.set(0.24, 0.24, 0.24);
         } else {
-            this.room.scale.set(0.23, 0.23, 0.23);
+            this.room.scale.set(0.16, 0.16, 0.16);
         }
     }
 
@@ -412,6 +409,4 @@ export default class Preloader extends EventEmitter {
             this.scale();
         }
     }
-
-
 }

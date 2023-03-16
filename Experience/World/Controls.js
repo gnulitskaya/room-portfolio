@@ -110,7 +110,7 @@ export default class Controls {
             "(min-width: 969px)": () => {
                 // console.log("fired desktop");
 
-                this.room.scale.set(0.23, 0.23, 0.23);
+                this.room.scale.set(0.24, 0.24, 0.24);
                 this.rectLight.width = 0.5;
                 this.rectLight.height = 0.7;
                 this.camera.orthographicCamera.position.set(0, 6.5, 10);

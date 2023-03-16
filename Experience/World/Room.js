@@ -16,10 +16,9 @@ export default class Room {
         // controls for animation
         this.lerp = {
             current: 0,
-            target: 1,
+            target: 0,
             ease: 0.1,
         }
-        console.log(this.room)
         this.setModel();
         this.setAnimation();
         this.onMouseMove();
@@ -48,8 +47,8 @@ export default class Room {
                 child.children[0].material.ior = 3;
                 child.children[0].material.transmission = 1;
                 child.children[0].material.opacity = 1;
-                // child.children[0].material.depthWrite = false;
-                // child.children[0].material.depthTest = false;
+                child.children[0].material.depthWrite = false;
+                child.children[0].material.depthTest = false;
             }
 
             // заставка на компе
@@ -78,12 +77,10 @@ export default class Room {
             //     child.scale.set(0, 0, 0);
             // }
 
-            console.log(child);
-
             child.scale.set(0, 0, 0);
             if (child.name === "Cube") {
                 // child.scale.set(1, 1, 1);
-                child.position.set(0, 3, 0);
+                child.position.set(0, -1, 0);
                 child.rotation.y = Math.PI / 4;
             }
 
@@ -108,7 +105,7 @@ export default class Room {
         // rectLight.add( rectLightHelper );
 
         this.scene.add(this.actualRoom);
-        this.actualRoom.scale.set(0.23,0.23,0.23);
+        this.actualRoom.scale.set(0.24,0.24,0.24);
         // this.actualRoom.rotation.y = Math.PI;
     }
 
@@ -122,7 +119,7 @@ export default class Room {
     onMouseMove() {
         window.addEventListener("mousemove", (e) => {
             this.rotation = ((e.clientX - window.innerWidth / 2) * 2) / window.innerWidth;
-            this.lerp.target = this.rotation * 0.1;
+            this.lerp.target = this.rotation * 0.05;
         })
     }
 
